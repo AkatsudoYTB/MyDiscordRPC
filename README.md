@@ -2,119 +2,119 @@
 
 # 🎮 MyDiscordRPC
 
-**Show everything you do - websites and desktop apps - on your Discord profile. Automatically.**
+**Affiche tout ce que tu fais — sites web et applis PC — sur ton profil Discord. Automatiquement.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 ![Windows](https://img.shields.io/badge/Windows-10%20%2F%2011-0078D6?logo=windows&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![Discord](https://img.shields.io/badge/Discord-Rich%20Presence-5865F2?logo=discord&logoColor=white)
 
-[🇫🇷 Français](README.md) · 🇬🇧 English
+🇫🇷 Français · [🇬🇧 English](README.en.md)
 
-<!-- 👉 Add a screenshot / GIF of your Discord presence + the extension here: -->
-<!-- ![Preview](docs/screenshot.png) -->
+<!-- 👉 Ajoute ici une capture / un GIF de ta présence Discord + de l'extension : -->
+<!-- ![Aperçu](docs/screenshot.png) -->
 
 </div>
 
 ---
 
-Automatically shows on your **Discord** profile what you're doing in your
-**browser** (YouTube, SoundCloud, any site) **and** in your **Windows apps**
-(FL Studio, VLC, Vocaloid, cmd...), with the real logo, the title, a progress bar,
-and more.
+Affiche automatiquement sur ton profil **Discord** ce que tu fais dans ton
+**navigateur** (YouTube, SoundCloud, n'importe quel site) **et** dans tes
+**applications Windows** (FL Studio, VLC, Vocaloid, cmd…), avec le vrai logo,
+le titre, une barre de temps, etc.
 
-- 100 % **free** and **open source** (MIT)
-- **No data collection**, everything stays local (except what goes to Discord)
+- 100 % **gratuit** et **open source** (MIT)
+- **Aucune collecte de données**, tout reste local (sauf ce qui va à Discord)
 - Windows 10 / 11
 
-> This guide is **for beginners**: every step is explained. Take your time -
-> nothing here is complicated.
+> Ce guide est **pour les débutants** : chaque étape est expliquée. Prends ton
+> temps, il n'y a rien de compliqué.
 
 ---
 
-# 📖 Contents
+# 📖 Sommaire
 
-1. [What is it, how does it work?](#1-what)
-2. [Step 1 - Install Python](#2-python)
-3. [Step 2 - Download MyDiscordRPC](#3-download)
-4. [Step 3 - Install the app (dependencies)](#4-deps)
-5. [Step 4 - Create your Discord application](#5-discord)
-6. [Step 5 - Install Cloudflared (for app logos)](#6-cloudflared)
-7. [Step 6 - Edit `settings.json`](#7-settings)
-8. [Step 7 - Run the app](#8-run)
-9. [Step 8 - Install the browser extension](#9-extension)
-10. [Step 9 - Set the options in the extension](#10-options)
-11. [Common problems](#11-problems)
+1. [C'est quoi, comment ça marche ?](#1-cest-quoi)
+2. [Étape 1 — Installer Python](#2-python)
+3. [Étape 2 — Télécharger MyDiscordRPC](#3-telecharger)
+4. [Étape 3 — Installer l'application (dépendances)](#4-dependances)
+5. [Étape 4 — Créer ton application Discord](#5-discord)
+6. [Étape 5 — Installer Cloudflared (pour les logos d'applis)](#6-cloudflared)
+7. [Étape 6 — Régler `settings.json`](#7-settings)
+8. [Étape 7 — Lancer l'application](#8-lancer)
+9. [Étape 8 — Installer l'extension navigateur](#9-extension)
+10. [Étape 9 — Régler les options dans l'extension](#10-options)
+11. [Problèmes fréquents](#11-problemes)
 
 ---
 
-<a name="1-what"></a>
-## 1. What is it, how does it work?
+<a name="1-cest-quoi"></a>
+## 1. C'est quoi, comment ça marche ?
 
-MyDiscordRPC has **two parts** that work together:
+MyDiscordRPC a **deux parties** qui fonctionnent ensemble :
 
-- **A browser extension** (Chrome/Edge): it sees which site you're on, which
- video you're watching, etc.
-- **A PC application**: it sees which Windows app is open, and talks to Discord
- to show your presence.
+- **Une extension** pour ton navigateur (Chrome/Edge) : elle voit sur quel site
+  tu es, quelle vidéo tu regardes, etc.
+- **Une application** sur ton PC : elle voit quelle appli Windows est ouverte, et
+  elle parle à Discord pour afficher ta présence.
 
 ```
-Browser (extension) ─┐
- ├─► PC application ─► Discord
-Windows apps ────────┘
+Navigateur (extension) ─┐
+                        ├─► Application PC ─► Discord
+Applications Windows ───┘
 ```
 
-So you install **both**. This guide explains how.
+Tu dois donc installer **les deux**. C'est ce que ce guide explique.
 
 ---
 
 <a name="2-python"></a>
-## 2. Step 1 - Install Python
+## 2. Étape 1 — Installer Python
 
-**What is Python?** It's a free, **official** program, widely used, that runs
-programs (including MyDiscordRPC). It is **not a virus**: it's made by a
-recognized foundation and downloaded by millions of people. You can install it
-with confidence.
+**C'est quoi Python ?** C'est un logiciel gratuit et **officiel**, très utilisé,
+qui permet de faire tourner des programmes (dont MyDiscordRPC). Ce n'est pas un
+virus : il est développé par une fondation reconnue et téléchargé par des
+millions de personnes. Tu peux l'installer en confiance.
 
-1. Go to the official site: **https://www.python.org/downloads/**
-2. Click the big **"Download Python 3.x.x"** button (the latest version).
-3. Open the downloaded file.
-4. **VERY IMPORTANT**: on the installer's first screen, tick the box at the
- bottom **"Add python.exe to PATH"**. ✅
- *(Without it, the commands won't work.)*
-5. Click **"Install Now"** and let it finish.
+1. Va sur le site officiel : **https://www.python.org/downloads/**
+2. Clique sur le gros bouton **« Download Python 3.x.x »** (la dernière version).
+3. Ouvre le fichier téléchargé.
+4. **TRÈS IMPORTANT** : sur le premier écran de l'installateur, coche la case en
+   bas **« Add python.exe to PATH »** (Ajouter au PATH). ✅
+   *(Sans ça, les commandes ne marcheront pas.)*
+5. Clique sur **« Install Now »** et laisse faire.
 
-**Check it works**: open the Start menu, type `cmd`, open **Command Prompt**, and
-type:
+**Vérifier que ça marche** : ouvre le menu Démarrer, tape `cmd`, ouvre l'**Invite
+de commandes**, et tape :
 ```
 python --version
 ```
-You should see `Python 3.x.x`. If you get an error, reinstall and make sure to
-tick "Add to PATH".
+Tu dois voir `Python 3.x.x`. Si tu vois une erreur, réinstalle en cochant bien
+« Add to PATH ».
 
 ---
 
-<a name="3-download"></a>
-## 3. Step 2 - Download MyDiscordRPC
+<a name="3-telecharger"></a>
+## 3. Étape 2 — Télécharger MyDiscordRPC
 
-1. On the project's GitHub page, click the green **"Code"** button →
- **"Download ZIP"**.
-2. Unzip it anywhere, e.g. on your Desktop. You get a `MyDiscordRPC` folder
- containing `desktop-app`, `browser-extension`, etc.
+1. Sur la page GitHub du projet, clique sur le bouton vert **« Code »** →
+   **« Download ZIP »**.
+2. Décompresse le ZIP où tu veux, par exemple sur le Bureau. Tu obtiens un
+   dossier `MyDiscordRPC` avec dedans `desktop-app`, `browser-extension`, etc.
 
-*(If you know Git: `git clone <repo-url>`.)*
+*(Si tu connais Git : `git clone <url-du-repo>`.)*
 
 ---
 
-<a name="4-deps"></a>
-## 4. Step 3 - Install the app (dependencies)
+<a name="4-dependances"></a>
+## 4. Étape 3 — Installer l'application (dépendances)
 
-Let's prepare the PC application. Open **Command Prompt** in the `desktop-app`
-folder:
-- open the `MyDiscordRPC\desktop-app` folder in File Explorer,
-- click the address bar, type `cmd`, and press Enter.
+On va préparer l'application PC. Ouvre l'**Invite de commandes** dans le dossier
+`desktop-app` :
+- ouvre le dossier `MyDiscordRPC\desktop-app` dans l'explorateur,
+- clique dans la barre d'adresse, tape `cmd` et appuie sur Entrée.
 
-Then run these commands **one at a time**:
+Puis tape ces commandes **une par une** :
 
 ```bash
 python -m venv .venv
@@ -123,158 +123,163 @@ python -m venv .venv
 .venv\Scripts\pip install -r requirements.txt
 ```
 
-The first creates an isolated "environment", the second installs the needed
-pieces (Discord, Windows detection...). Wait for it to finish.
+La première crée un « environnement » isolé, la seconde installe les morceaux
+nécessaires (Discord, détection Windows…). Attends que ça finisse.
 
 ---
 
 <a name="5-discord"></a>
-## 5. Step 4 - Create your Discord application
+## 5. Étape 4 — Créer ton application Discord
 
-**Why?** Discord needs to know "who" shows your presence. For that, you create a
-small Discord "application" (free, 2 minutes) and copy its **number
-(Application ID)**.
+**Pourquoi ?** Discord a besoin de savoir « qui » affiche ta présence. Pour ça,
+on crée une petite « application » Discord (gratuit, 2 minutes) et on récupère
+son **numéro (Application ID)**.
 
-> ℹ️ **No login/OAuth needed** for presence: local Rich Presence only needs this
-> number. (PreMiD looks "login-only" because **its makers already created the
-> applications and provide the numbers**. If you distribute this project, do the
-> same: put your number as the default in
-> `desktop-app/config/default_settings.json` (`client_id`) → people who download
-> won't have to create anything.)
+> ℹ️ **Pas besoin de se connecter/OAuth** : le Rich Presence local n'a besoin que
+> de ce numéro. (PreMiD paraît « sans création d'appli » parce que **ses
+> créateurs ont déjà créé les applications et fournissent les numéros**. Si tu
+> distribues ce projet, tu peux faire pareil : mets ton numéro par défaut dans
+> `desktop-app/config/default_settings.json` (champ `client_id`) → les gens qui
+> téléchargent n'auront **rien à créer**.)
 
-Steps:
-1. Go to **https://discord.com/developers/applications** and log in.
-2. Top-right, click **"New Application"**.
-3. Give it a name (this name shows **in bold** on your profile, e.g.
- `MyDiscordRPC` or your username), accept the terms, confirm.
-4. You land on **"General Information"**. Find **"Application ID"**: a long
- number. Click **"Copy"**.
-5. Keep it aside - you paste it in step 6 (or later in the extension).
+Étapes :
+1. Va sur **https://discord.com/developers/applications** et connecte-toi.
+2. En haut à droite, clique **« New Application »**.
+3. Donne un nom (ce nom s'affichera **en gros** sur ton profil, ex. `MyDiscordRPC`
+   ou ton pseudo), coche les conditions, valide.
+4. Tu arrives sur **« General Information »**. Repère **« Application ID »** : un
+   long nombre. Clique **« Copy »** pour le copier.
+5. Garde-le de côté, on le colle à l'étape 6 (ou plus tard dans l'extension).
 
-*(That's all: no bot, no secret, no authorization.)*
+*(C'est tout : pas de bot, pas de secret, pas d'autorisation.)*
 
 ---
 
 <a name="6-cloudflared"></a>
-## 6. Step 5 - Install Cloudflared (for app logos)
+## 6. Étape 5 — Installer Cloudflared (pour les logos d'applis)
 
-**What's it for?** To show the **logo of your PC apps** (FL Studio, VLC...) on
-Discord, Discord must be able to "fetch" the image. Cloudflared creates a small,
-temporary public link to your PC for that. It's **free and account-free**.
+**À quoi ça sert ?** Pour afficher le **logo de tes applis PC** (FL Studio, VLC…)
+sur Discord, il faut que Discord puisse « aller chercher » l'image. Cloudflared
+crée un petit lien public temporaire vers ton PC pour ça. C'est **gratuit et sans
+compte**.
 
-> This step is **optional**: without it, everything works, but PC apps show
-> **without a logo** (just the name + project).
+> Cette étape est **optionnelle** : sans elle, tout marche, mais les applis PC
+> s'afficheront **sans logo** (juste le nom + le projet).
 
-1. Go to **https://github.com/cloudflare/cloudflared/releases** (latest version).
-2. Download **`cloudflared-windows-amd64.exe`**
- (`amd64` = 64-bit Windows PC, the normal case).
-3. Create a folder **`C:\cloudflared`**.
-4. Put the file inside and **rename** it to `cloudflared.exe`
- (final path: **`C:\cloudflared\cloudflared.exe`**).
+1. Va sur **https://github.com/cloudflare/cloudflared/releases** (dernière version).
+2. Télécharge le fichier **`cloudflared-windows-amd64.exe`**
+   (`amd64` = PC Windows 64 bits, le cas normal).
+3. Crée un dossier **`C:\cloudflared`**.
+4. Mets le fichier dedans et **renomme-le** simplement `cloudflared.exe`
+   (donc au final : **`C:\cloudflared\cloudflared.exe`**).
+
+*(On indiquera ce chemin à l'étape suivante.)*
 
 ---
 
 <a name="7-settings"></a>
-## 7. Step 6 - Edit `settings.json`
+## 7. Étape 6 — Régler `settings.json`
 
-On the **first run** (step 7), a `desktop-app\config\settings.json` file is
-created. Open it with Notepad and fill in:
+Au **premier lancement** (étape 7), un fichier `desktop-app\config\settings.json`
+est créé. Ouvre-le avec le Bloc-notes et renseigne :
 
 ```json
 {
- "discord": { "client_id": "PASTE_YOUR_APPLICATION_ID_HERE" },
- "icons": {
- "tunnel": "cloudflared",
- "cloudflared_path": "C:\\cloudflared\\cloudflared.exe"
- }
+  "discord": { "client_id": "COLLE_TON_APPLICATION_ID_ICI" },
+  "icons": {
+    "tunnel": "cloudflared",
+    "cloudflared_path": "C:\\cloudflared\\cloudflared.exe"
+  }
 }
 ```
 
-- `client_id`: the number copied in step 4.
-- `cloudflared_path`: the path from step 5 (keep the **double backslashes** `\\`).
+- `client_id` : le numéro copié à l'étape 4.
+- `cloudflared_path` : le chemin de l'étape 5 (garde les **doubles antislashs** `\\`).
 
-Save. *(You can also set the Discord ID from the extension - see step 9 - without
-touching the file.)*
+Enregistre. *(Tu peux aussi régler l'ID Discord directement depuis l'extension —
+voir étape 9 — sans toucher au fichier.)*
 
 ---
 
-<a name="8-run"></a>
-## 8. Step 7 - Run the app
+<a name="8-lancer"></a>
+## 8. Étape 7 — Lancer l'application
 
-1. **Start Discord** (the desktop app, not the browser version - it must be
- running).
-2. In Command Prompt (in `desktop-app`), run:
+1. **Lance Discord** (l'appli de bureau, pas la version navigateur — elle doit
+   tourner).
+2. Dans l'Invite de commandes (dossier `desktop-app`), tape :
 ```bash
 .venv\Scripts\python.exe run.py
 ```
-3. Leave that window **open** (it runs the app). You should see lines like
- `Connected to Discord`, `WebSocket server...`, and if cloudflared is set up
- `Public icons URL (Cloudflare): https://...`.
+3. Laisse cette fenêtre **ouverte** (elle fait tourner l'app). Tu dois voir des
+   lignes comme `Connecté à Discord`, `Serveur WebSocket local…`, et si
+   cloudflared est configuré `URL publique des icônes (Cloudflare) : https://…`.
 
-To stop: `Ctrl + C` in the window.
+Pour arrêter : `Ctrl + C` dans la fenêtre.
 
 ---
 
 <a name="9-extension"></a>
-## 9. Step 8 - Install the browser extension
+## 9. Étape 8 — Installer l'extension navigateur
 
-1. In your browser, go to **`chrome://extensions`** (or
- **`edge://extensions`** for Edge).
-2. Top-right, turn on **"Developer mode"**.
-3. Click **"Load unpacked"**.
-4. Select the **`browser-extension`** folder (the one with `manifest.json`).
-5. The MyDiscordRPC icon (purple ▶ square) appears. The **options open
- automatically** the first time.
+1. Ouvre ton navigateur et va sur **`chrome://extensions`** (ou
+   **`edge://extensions`** pour Edge).
+2. En haut à droite, active le **« Mode développeur »**.
+3. Clique **« Charger l'extension non empaquetée »**.
+4. Sélectionne le dossier **`browser-extension`** (celui qui contient
+   `manifest.json`).
+5. L'icône MyDiscordRPC (carré violet ▶) apparaît. Les **options s'ouvrent
+   automatiquement** la première fois.
 
-*(After every code update, go back to `chrome://extensions` and click the ⟳
-button on MyDiscordRPC.)*
+*(Après chaque mise à jour du code, reviens sur `chrome://extensions` et clique le
+bouton ⟳ sur MyDiscordRPC.)*
 
 ---
 
 <a name="10-options"></a>
-## 10. Step 9 - Set the options in the extension
+## 10. Étape 9 — Régler les options dans l'extension
 
-Click the extension icon → **⚙ Settings**. There are several tabs:
+Clique l'icône de l'extension → **⚙ Paramètres**. Tu as plusieurs onglets :
 
-- **Guide**: a reminder of the steps.
-- **Discord**: paste your **Application ID** here (if you didn't put it in
- `settings.json`) → **Save**. The badge at the top turns **green** when the app
- is connected.
-- **Indicator**: the small on-page popup - enable/disable, position (6 choices),
- animation, duration, **sound** (including a custom sound file). It appears when
- you open a site and when you switch tabs.
-- **Sites**: show sites as **domain** (`youtube.com`), **name** (`YouTube`) or
- **full path**; plus a **list of sites to never show**.
-- **Themes**: paste a shareable **theme** (JSON) to customize everything.
+- **Guide** : un rappel des étapes.
+- **Discord** : colle ton **Application ID** ici (si tu ne l'as pas mis dans
+  `settings.json`) → **Enregistrer**. Le badge en haut passe au **vert** quand
+  l'app est connectée.
+- **Indicateur** : la petite popup sur les pages — activer/désactiver, position
+  (6 choix), animation, durée, **son** (dont un son perso par fichier). Elle
+  apparaît à l'ouverture d'un site et au changement d'onglet.
+- **Sites** : afficher les sites en **domaine** (`youtube.com`), en **nom**
+  (`YouTube`) ou en **chemin complet** ; + une **liste de sites à ne jamais
+  afficher**.
+- **Thèmes** : coller un **thème** (JSON) partageable pour tout personnaliser.
 
-**Pick your language** top-right (English / Français).
+**Choisis ta langue** en haut à droite (English / Français).
 
 ---
 
-<a name="11-problems"></a>
-## 11. Common problems
+<a name="11-problemes"></a>
+## 11. Problèmes fréquents
 
-| Issue | Fix |
+| Souci | Solution |
 |---|---|
-| `python is not recognized` | Reinstall Python and tick **"Add to PATH"**. |
-| Red badge "App not connected" | Is the app (`run.py`) running? Is Discord running? Correct Application ID? |
-| Nothing on Discord | Open your Discord profile (click your avatar); enable *Settings → Activity Privacy → Share your activity*. |
-| No app logo | Is cloudflared running? Check the `Public icons URL` line in the logs. |
-| Extension stops reacting after an update | `chrome://extensions` → ⟳ on MyDiscordRPC. |
-| The "Watch on YouTube" button | Normal: Discord **hides your own buttons**, only your friends see them. |
+| `python n'est pas reconnu` | Réinstalle Python en cochant **« Add to PATH »**. |
+| Badge rouge « App non connectée » | L'app (`run.py`) tourne-t-elle ? Discord est-il lancé ? Bon Application ID ? |
+| Rien sur Discord | Ouvre ton profil Discord (clique ton avatar) ; active *Paramètres → Confidentialité de l'activité → Partager mon activité*. |
+| Pas de logo d'appli | Cloudflared est-il lancé ? Regarde la ligne `URL publique des icônes` dans les logs. |
+| L'extension ne réagit plus après mise à jour | `chrome://extensions` → ⟳ sur MyDiscordRPC. |
+| Le bouton « Regarder sur YouTube » | Normal : Discord **cache tes propres boutons**, seuls tes amis les voient. |
 
 ---
 
-## Going further
+## Pour aller plus loin
 
-- Show **"YouTube" in bold** (instead of your app name):
- [docs/04-nom-par-plateforme.md](docs/04-nom-par-plateforme.md)
-- Windows app detection (+ logos):
- [docs/05-applications-windows.md](docs/05-applications-windows.md)
-- Extension options & themes:
- [docs/06-options-extension.md](docs/06-options-extension.md)
-- Technical architecture: [docs/01-architecture.md](docs/01-architecture.md)
+- Afficher **« YouTube » en gros** (au lieu du nom de ton app) :
+  [docs/04-nom-par-plateforme.md](docs/04-nom-par-plateforme.md)
+- Détection des applications Windows (+ logos) :
+  [docs/05-applications-windows.md](docs/05-applications-windows.md)
+- Options & thèmes de l'extension :
+  [docs/06-options-extension.md](docs/06-options-extension.md)
+- Architecture technique : [docs/01-architecture.md](docs/01-architecture.md)
 
-## License
+## Licence
 
-MIT - see [`LICENSE`](LICENSE).
+MIT — voir [`LICENSE`](LICENSE).
